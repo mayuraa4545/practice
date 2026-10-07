@@ -1,1 +1,61 @@
+name : pipeline practice
 
+on:
+    push:
+        branches:
+            - main 
+
+
+jobs:
+    job1:
+        runs-on : ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v7
+            - name: run python code
+              run: python job1.py
+
+    job2:
+        needs: job1
+        runs-on : ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v7
+            - name: run python code
+              run: python job2.py
+
+    job3:
+        needs: job1
+        runs-on : ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v7
+            - name: run python code
+              run: python job3.py    
+    
+    job4:
+        needs: job2
+        runs-on : ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v7
+            - name: run python code
+              run: python job4.py
+    
+    job5:
+        needs: job3
+        runs-on : ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v7
+            - name: run python code
+              run: python job5.py
+
+    job6:
+        needs: [job4, job5]
+        runs-on : ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v7
+            - name: run python code
+              run: python job5.py
